@@ -1,98 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Aditya Medico</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya Medico</title>
 
 <style>
 body {
   margin: 0;
-  font-family: Arial;
-  background: #f4f8fb;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f1f6fb;
 }
 
+/* Header */
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background: #0077b6;
   color: white;
-  padding: 15px;
-  text-align: center;
-  font-size: 24px;
+  padding: 10px 20px;
 }
 
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+/* Hero */
 .hero {
-  background: url('https://images.unsplash.com/photo-1587854692152-cbe660dbde88');
+  background: url('https://images.unsplash.com/photo-1588776814546-ec7e1d7b5b0c');
   background-size: cover;
+  background-position: center;
   color: white;
   text-align: center;
-  padding: 60px 20px;
+  padding: 80px 20px;
+}
+
+.hero h1 {
+  font-size: 40px;
 }
 
 .btn {
-  background: green;
+  background: #00b4d8;
+  padding: 12px 25px;
   color: white;
-  padding: 10px 20px;
   border-radius: 5px;
   text-decoration: none;
 }
 
+/* Products */
 .products {
+  padding: 30px;
+  text-align: center;
+}
+
+.products h2 {
+  margin-bottom: 20px;
+}
+
+.grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
   gap: 20px;
-  padding: 20px;
 }
 
 .card {
   background: white;
-  padding: 15px;
+  padding: 20px;
   border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.contact {
+.card:hover {
+  transform: scale(1.05);
+  transition: 0.3s;
+}
+
+/* About */
+.about {
   background: white;
-  padding: 20px;
+  padding: 30px;
   margin: 20px;
   border-radius: 10px;
 }
 
+/* Contact */
+.contact {
+  background: #0077b6;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* WhatsApp */
 .whatsapp {
   position: fixed;
   bottom: 20px;
   right: 20px;
   background: green;
   color: white;
-  padding: 12px;
+  padding: 15px;
   border-radius: 50%;
   text-decoration: none;
   font-size: 20px;
-}
-
-footer {
-  background: #0077b6;
-  color: white;
-  text-align: center;
-  padding: 10px;
 }
 </style>
 </head>
 
 <body>
 
-<header>Aditya Medico 💊</header>
+<header>
+<div class="logo">Aditya Medico 💊</div>
+<nav>
+<a href="#">Home</a>
+<a href="#">Products</a>
+<a href="#">Contact</a>
+</nav>
+</header>
 
 <div class="hero">
-<h1>All Medicines Available</h1>
-<p>Best Price | Genuine Products</p>
+<h1>Your Trusted Medical Store</h1>
+<p>All Medicines Available | Genuine Products</p>
+<br>
 <a class="btn" href="https://wa.me/8825253574">Order on WhatsApp</a>
 </div>
 
 <div class="products">
+<h2>Our Products</h2>
 
+<div class="grid">
 <div class="card">
 <h3>Paracetamol</h3>
-<p>Fever Relief</p>
+<p>Fever & Pain Relief</p>
 </div>
 
 <div class="card">
@@ -102,27 +148,28 @@ footer {
 
 <div class="card">
 <h3>Vitamin Tablets</h3>
-<p>Immunity Boost</p>
+<p>Boost Immunity</p>
 </div>
 
 <div class="card">
 <h3>Sanitizer</h3>
 <p>Stay Safe</p>
 </div>
+</div>
+</div>
 
+<div class="about">
+<h2>About Us</h2>
+<p>Aditya Medico is your trusted pharmacy providing genuine medicines at affordable prices.</p>
 </div>
 
 <div class="contact">
 <h2>Contact Us</h2>
-<p>📞 Phone: 8825253574</p>
+<p>📞 Phone:8825253574</p>
 <p>📍 Address: behind pal Satabdi mall, Windsome park rd , saguna more danapur 801503 ( Patna )</p>
 </div>
 
-<a class="whatsapp" href="https://wa.me/8825253574">💬</a>
-
-<footer>
-<p>© 2026 Aditya Medico</p>
-</footer>
+<a class="whatsapp" href="https://wa.me/919876543210">💬</a>
 
 </body>
 </html>
