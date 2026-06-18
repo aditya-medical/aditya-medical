@@ -7,14 +7,21 @@
     body {
       margin: 0;
       font-family: Arial;
-      background: url('https://images.unsplash.com/photo-1580281657527-47e4b7d81b92') no-repeat center center/cover;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+      url("https://images.unsplash.com/photo-1580281657527-47e4b7d81b92");
+      background-size: cover;
       color: white;
     }
 
     header {
-      background: rgba(0,0,0,0.7);
-      padding: 20px;
       text-align: center;
+      padding: 20px;
+      background: rgba(0,0,0,0.85);
+    }
+
+    header h1 {
+      margin: 5px;
+      font-size: 28px;
     }
 
     .container {
@@ -22,36 +29,43 @@
     }
 
     .card {
-      background: rgba(0,0,0,0.7);
-      padding: 15px;
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
       margin: 15px 0;
-      border-radius: 10px;
-      box-shadow: 0 0 10px black;
+      border-radius: 12px;
+      backdrop-filter: blur(5px);
     }
 
     input {
-      padding: 10px;
-      margin: 5px;
-      width: 90%;
-      border-radius: 5px;
+      padding: 12px;
+      margin: 8px 0;
+      width: 95%;
+      border-radius: 6px;
       border: none;
     }
 
     button {
-      padding: 10px;
-      background: green;
+      padding: 12px;
+      background: #00c853;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
+      margin-top: 10px;
       cursor: pointer;
+      width: 100%;
+      font-size: 15px;
     }
 
     button:hover {
-      background: darkgreen;
+      background: #009624;
     }
 
     h2 {
       color: #00ffcc;
+    }
+
+    ul {
+      padding-left: 20px;
     }
   </style>
 
@@ -62,7 +76,7 @@
 <header>
   <h1>🏥 Aditya Medico</h1>
   <p>📞 8825253574</p>
-  <p>📍 Behind Pal Satabdi Mall, Windsome Park Rd, Saguna More, Danapur, Patna - 801503</p>
+  <p>📍 Saguna More, Danapur, Patna</p>
 </header>
 
 <div class="container">
@@ -70,76 +84,84 @@
   <!-- ORDER -->
   <div class="card">
     <h2>🛒 Order Medicine</h2>
-    <input type="text" id="name" placeholder="Your Name">
-    <input type="text" id="address" placeholder="Your Address">
-    <input type="text" id="medicine" placeholder="Medicine Name">
-    <button onclick="order()">Order Now</button>
+    <input id="name" placeholder="Your Name">
+    <input id="address" placeholder="Your Address">
+    <input id="medicine" placeholder="Medicine Name">
+
+    <button onclick="order()">Place Order</button>
+
+    <a id="waLink" target="_blank">
+      <button>📲 Order on WhatsApp</button>
+    </a>
   </div>
 
-  <!-- MEDICINE LIST -->
+  <!-- MEDICINES -->
   <div class="card">
     <h2>💊 Available Medicines</h2>
     <ul>
-      <li>Paracetamol</li>
       <li>Dolo 650</li>
-      <li>Azithromycin</li>
+      <li>Paracetamol</li>
       <li>Cough Syrup</li>
-      <li>ORS</li>
       <li>Vitamin Tablets</li>
-      <li>Disprin</li>
-      <li>Calcium Tablets</li>
+      <li>ORS</li>
+      <li>Calcium</li>
     </ul>
   </div>
 
   <!-- HOME SERVICE -->
   <div class="card">
-    <h2>🏠 Home Service Available</h2>
-    <p>✔ Injection (Sui) at Home</p>
-    <p>✔ IV Drip (Pani Chadhana)</p>
-    <p>✔ Nursing Care</p>
+    <h2>🏠 Home Service</h2>
+    <p>✔ Injection (Sui)</p>
+    <p>✔ IV Drip (Pani chadhana)</p>
+    <p>✔ Basic Nursing</p>
   </div>
 
   <!-- BILL -->
   <div class="card">
     <h2>🧾 Generate Bill</h2>
-    <input type="text" id="billName" placeholder="Customer Name">
-    <input type="text" id="billMedicine" placeholder="Medicine">
-    <input type="number" id="billPrice" placeholder="Price">
-    <button onclick="bill()">Generate</button>
-    <p id="billOutput"></p>
+    <input id="billName" placeholder="Customer Name">
+    <input id="billMed" placeholder="Medicine">
+    <input id="billPrice" placeholder="Price">
+    <button onclick="bill()">Generate Bill</button>
+    <p id="output"></p>
   </div>
 
 </div>
 
 <script>
-function order() {
+
+function order(){
   let name = document.getElementById("name").value;
   let address = document.getElementById("address").value;
-  let medicine = document.getElementById("medicine").value;
+  let med = document.getElementById("medicine").value;
 
-  if(name=="" || address=="" || medicine==""){
+  if(name==""||address==""||med==""){
     alert("Sab details bhar bhai!");
     return;
   }
 
-  alert("✅ Order Placed!\n\nName: " + name + "\nMedicine: " + medicine + "\nAddress: " + address);
+  alert("✅ Order Placed!");
+
+  let msg = "New Order%0AName: "+name+"%0AAddress: "+address+"%0AMedicine: "+med;
+  let link = "https://wa.me/918825253574?text=" + msg;
+
+  document.getElementById("waLink").href = link;
 }
 
-function bill() {
-  let name = document.getElementById("billName").value;
-  let med = document.getElementById("billMedicine").value;
-  let price = document.getElementById("billPrice").value;
+function bill(){
+  let n = document.getElementById("billName").value;
+  let m = document.getElementById("billMed").value;
+  let p = document.getElementById("billPrice").value;
 
-  if(name=="" || med=="" || price==""){
-    alert("Bill ke liye sab fill kar!");
+  if(n==""||m==""||p==""){
+    alert("Sab fill karo!");
     return;
   }
 
-  document.getElementById("billOutput").innerHTML =
-    "🧾 Customer: " + name +
-    "<br>💊 Medicine: " + med +
-    "<br>💰 Total: ₹" + price;
+  document.getElementById("output").innerHTML =
+  "🧾 Customer: "+n+"<br>💊 Medicine: "+m+"<br>💰 Total: ₹"+p;
 }
+
 </script>
 
 </body>
