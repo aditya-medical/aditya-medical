@@ -1,212 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aditya Medico</title>
-
-<style>
-body {margin:0; font-family:Arial; scroll-behavior:smooth;}
-
-/* HEADER */
-header {
-display:flex;
-justify-content:space-between;
-padding:15px;
-background:white;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
-position:sticky;
-top:0;
-}
-
-.logo {font-size:22px; font-weight:bold; color:#0077b6;}
-
-nav a {
-margin:0 10px;
-text-decoration:none;
-color:black;
-font-weight:bold;
-}
-
-/* HERO SLIDER */
-.hero {
-height:90vh;
-color:white;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-background-size:cover;
-background-position:center;
-animation:slider 15s infinite;
-}
-
-@keyframes slider {
-0% {background-image:url('https://images.unsplash.com/photo-1587854692152-cbe660dbde88');}
-33% {background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b');}
-66% {background-image:url('https://images.unsplash.com/photo-1585435557343-3b092031a831');}
-100% {background-image:url('https://images.unsplash.com/photo-1587854692152-cbe660dbde88');}
-}
-
-.hero h1 {font-size:40px;}
-
-.btn {
-background:green;
-padding:12px 20px;
-color:white;
-text-decoration:none;
-border-radius:5px;
-}
-
-/* SECTION */
-section {padding:50px;}
-
-/* PRODUCTS */
-.grid {
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-}
-
-.card {
-border:1px solid #ddd;
-border-radius:10px;
-padding:10px;
-text-align:center;
-transition:0.3s;
-}
-.card:hover {transform:scale(1.05);}
-
-.card img {
-width:100%;
-height:150px;
-border-radius:10px;
-}
-
-/* ORDER FORM */
-.form-box {
-max-width:400px;
-margin:auto;
-}
-
-input, textarea {
-width:100%;
-padding:10px;
-margin:10px 0;
-border-radius:5px;
-border:1px solid #ccc;
-}
-
-button {
-background:#0077b6;
-color:white;
-padding:10px;
-border:none;
-width:100%;
-}
-
-/* FOOTER */
-.footer {
-background:#003366;
-color:white;
-padding:20px;
-}
-
-/* WHATSAPP */
-.whatsapp {
-position:fixed;
-bottom:20px;
-right:20px;
-background:green;
-padding:15px;
-border-radius:50%;
-color:white;
-text-decoration:none;
-}
-</style>
+  <title>Medical Store</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header>
-<div class="logo">💊 Aditya Medico</div>
-<nav>
-<a href="#home">Home</a>
-<a href="#products">Products</a>
-<a href="#order">Order</a>
-<a href="#contact">Contact</a>
-</nav>
+  🏥 My Medical Store
 </header>
 
-<!-- HERO -->
-<section id="home" class="hero">
-<div>
-<h1>Aditya Medico</h1>
-<p>All Medicines Available</p><br>
-<a class="btn" href="https://wa.me/918825253574">Order on WhatsApp</a>
-</div>
-</section>
+<div class="container">
 
-<!-- PRODUCTS -->
-<section id="products">
-<h2>Our Products</h2>
-<div class="grid">
+  <div class="card">
+    <h3>Paracetamol</h3>
+    <p>Fever & pain relief</p>
+    <button onclick="addToCart('Paracetamol')">Add to Cart</button>
+  </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1580281657527-47fae0d7aab1">
-<h3>Pain Relief</h3>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b">
-<h3>Cough & Cold</h3>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1585435557343-3b092031a831">
-<h3>Vitamins</h3>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1583947215259-38e31be8751f">
-<h3>Sanitizer</h3>
-</div>
+  <div class="card">
+    <h3>Cough Syrup</h3>
+    <p>Cold & cough relief</p>
+    <button onclick="addToCart('Cough Syrup')">Add to Cart</button>
+  </div>
 
 </div>
-</section>
 
-<!-- ORDER FORM -->
-<section id="order">
-<h2>Order Medicine</h2>
+<h2>🛒 Cart</h2>
+<ul id="cart"></ul>
 
-<div class="form-box">
-<input type="text" id="name" placeholder="Your Name">
-<input type="text" id="phone" placeholder="Phone Number">
-<textarea id="medicine" placeholder="Enter medicine name"></textarea>
-<button onclick="sendWhatsApp()">Send Order</button>
-</div>
-</section>
+<h3>📦 Order</h3>
+<input id="name" placeholder="Your Name">
+<input id="phone" placeholder="mobile number">
+<input id="address" placeholder="Address">
+<button onclick="placeOrder()">Place Order</button>
 
-<!-- CONTACT -->
-<section id="contact" class="footer">
-<h2>Contact</h2>
-<p>📞 8825253574</p>
-<p>📍 Saguna More, Danapur, Patna</p>
-</section>
-
-<a class="whatsapp" href="https://wa.me/918825253574">💬</a>
-
-<script>
-function sendWhatsApp() {
-let name = document.getElementById("name").value;
-let phone = document.getElementById("phone").value;
-let medicine = document.getElementById("medicine").value;
-
-let msg = `Name: ${name}%0APhone: ${phone}%0AMedicine: ${medicine}`;
-
-window.open(`https://wa.me/918825253574?text=${msg}`);
-}
-</script>
-
+<script src="script.js"></script>
+<h2>🏠 Home Service Available</h2>
+<p>Injection 💉 | IV Drip 💧 | Basic Treatment at Home</p>
 </body>
 </html>
