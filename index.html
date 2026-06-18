@@ -7,93 +7,68 @@
 
 <style>
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: url('https://images.unsplash.com/photo-1580281657527-47b0a6f3d5a5') no-repeat center/cover;
-  color: #333;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://images.unsplash.com/photo-1580281657521-1f0c6a6e3b1b') no-repeat center center/cover;
+    color: white;
 }
 
 /* overlay */
 .overlay {
-  background: rgba(0,0,0,0.6);
-  min-height: 100vh;
+    background: rgba(0,0,0,0.7);
+    min-height: 100vh;
+    padding: 20px;
 }
 
 /* header */
 header {
-  background: #0f9d58;
-  color: white;
-  padding: 15px;
-  text-align: center;
-  font-size: 22px;
-  font-weight: bold;
+    text-align: center;
+    padding: 20px;
+}
+
+header h1 {
+    font-size: 35px;
+    color: #00ffcc;
 }
 
 /* info box */
 .info {
-  text-align: center;
-  padding: 10px;
-  color: #fff;
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px;
+    text-align: center;
 }
 
-/* search */
-.search-box {
-  display: flex;
-  justify-content: center;
-  margin: 15px;
-}
-
-.search-box input {
-  width: 60%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px 0 0 5px;
-}
-
-.search-box button {
-  padding: 10px;
-  border: none;
-  background: #ff9800;
-  color: white;
-  border-radius: 0 5px 5px 0;
-}
-
-/* products */
+/* medicines */
 .products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
-  padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+    gap: 15px;
+    padding: 20px;
 }
 
 .card {
-  background: white;
-  border-radius: 10px;
-  padding: 10px;
-  text-align: center;
+    background: rgba(255,255,255,0.1);
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
 }
 
 .card img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
-.btn {
-  margin-top: 10px;
-  background: #0f9d58;
-  color: white;
-  padding: 8px;
-  border: none;
-  border-radius: 5px;
-}
-
-/* footer */
-footer {
-  text-align: center;
-  background: black;
-  color: white;
-  padding: 10px;
+button {
+    background: #00ffcc;
+    border: none;
+    padding: 8px;
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 </style>
 
@@ -103,53 +78,45 @@ footer {
 
 <div class="overlay">
 
-<header>Aditya Medico</header>
+<header>
+<h1>Aditya Medico</h1>
+<p>Your Trusted Medical Store</p>
+</header>
 
 <div class="info">
-📞 8825253574 <br>
-📍 Behind Pal Satabdi Mall, Windsome Park Rd, Saguna More, Danapur, Patna - 801503
+<p><b>📞 Phone:</b> 8825253574</p>
+<p><b>📍 Address:</b> Behind Pal Satabdi Mall, Windsome Park Rd, Saguna More, Danapur, Patna - 801503</p>
 </div>
 
-<div class="search-box">
-<input type="text" placeholder="Search medicine...">
-<button>Search</button>
-</div>
+<h2 style="text-align:center;">Medicines</h2>
 
 <div class="products">
 
 <div class="card">
 <img src="https://via.placeholder.com/150">
-<h4>Paracetamol</h4>
-<p>₹30</p>
-<button class="btn">Order</button>
+<p>Paracetamol</p>
+<button>Order</button>
 </div>
 
 <div class="card">
 <img src="https://via.placeholder.com/150">
-<h4>Cough Syrup</h4>
-<p>₹120</p>
-<button class="btn">Order</button>
+<p>Cough Syrup</p>
+<button>Order</button>
 </div>
 
 <div class="card">
 <img src="https://via.placeholder.com/150">
-<h4>Vitamin Tablets</h4>
-<p>₹80</p>
-<button class="btn">Order</button>
+<p>Vitamin Tablets</p>
+<button>Order</button>
 </div>
 
 <div class="card">
 <img src="https://via.placeholder.com/150">
-<h4>ORS</h4>
-<p>₹20</p>
-<button class="btn">Order</button>
+<p>Injection</p>
+<button>Order</button>
 </div>
 
 </div>
-
-<footer>
-© 2026 Aditya Medico | All Rights Reserved
-</footer>
 
 </div>
 
