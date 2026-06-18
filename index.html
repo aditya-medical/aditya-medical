@@ -1,328 +1,157 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Aditya Medico</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya Medico</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-      url("https://images.unsplash.com/photo-1580281657527-47e4b7d81b92");
-      background-size: cover;
-      color: white;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('https://images.unsplash.com/photo-1580281657527-47b0a6f3d5a5') no-repeat center/cover;
+  color: #333;
+}
 
-    header {
-      text-align: center;
-      padding: 20px;
-      background: rgba(0,0,0,0.85);
-    }
+/* overlay */
+.overlay {
+  background: rgba(0,0,0,0.6);
+  min-height: 100vh;
+}
 
-    header h1 {
-      margin: 5px;
-      font-size: 28px;
-    }
+/* header */
+header {
+  background: #0f9d58;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+}
 
-    .container {
-      padding: 20px;
-    }
+/* info box */
+.info {
+  text-align: center;
+  padding: 10px;
+  color: #fff;
+}
 
-    .card {
-      background: rgba(255,255,255,0.1);
-      padding: 20px;
-      margin: 15px 0;
-      border-radius: 12px;
-      backdrop-filter: blur(5px);
-    }
+/* search */
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
 
-    input {
-      padding: 12px;
-      margin: 8px 0;
-      width: 95%;
-      border-radius: 6px;
-      border: none;
-    }
+.search-box input {
+  width: 60%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+}
 
-    button {
-      padding: 12px;
-      background: #00c853;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      margin-top: 10px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 15px;
-    }
+.search-box button {
+  padding: 10px;
+  border: none;
+  background: #ff9800;
+  color: white;
+  border-radius: 0 5px 5px 0;
+}
 
-    button:hover {
-      background: #009624;
-    }
+/* products */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
 
-    h2 {
-      color: #00ffcc;
-    }
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
 
-    ul {
-      padding-left: 20px;
-    }
-  </style>
+.card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.btn {
+  margin-top: 10px;
+  background: #0f9d58;
+  color: white;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+}
+
+/* footer */
+footer {
+  text-align: center;
+  background: black;
+  color: white;
+  padding: 10px;
+}
+</style>
 
 </head>
 
 <body>
 
-<header>
-  <h1>🏥 Aditya Medico</h1>
-  <p>📞 8825253574</p>
-  <p>📍 Saguna More, Danapur, Patna</p>
-</header>
+<div class="overlay">
 
-<div class="container">
+<header>Aditya Medico</header>
 
-  <!-- ORDER -->
-  <div class="card">
-    <h2>🛒 Order Medicine</h2>
-    <input id="name" placeholder="Your Name">
-    <input id="address" placeholder="Your Address">
-    <input id="medicine" placeholder="Medicine Name">
-
-    <button onclick="order()">Place Order</button>
-
-    <a id="waLink" target="_blank">
-      <button>📲 Order on WhatsApp</button>
-    </a>
-  </div>
-
-  <!-- MEDICINES -->
-  <div class="card">
-    <h2>💊 Available Medicines</h2>
-    <ul>
-      <li>Dolo 650</li>
-      <li>Paracetamol</li>
-      <li>Cough Syrup</li>
-      <li>Vitamin Tablets</li>
-      <li>ORS</li>
-      <li>Calcium</li>
-    </ul>
-  </div>
-
-  <!-- HOME SERVICE -->
-  <div class="card">
-    <h2>🏠 Home Service</h2>
-    <p>✔ Injection (Sui)</p>
-    <p>✔ IV Drip (Pani chadhana)</p>
-    <p>✔ Basic Nursing</p>
-  </div>
-
-  <!-- BILL -->
-  <div class="card">
-    <h2>🧾 Generate Bill</h2>
-    <input id="billName" placeholder="Customer Name">
-    <input id="billMed" placeholder="Medicine">
-    <input id="billPrice" placeholder="Price">
-    <button onclick="bill()">Generate Bill</button>
-    <p id="output"></p>
-  </div>
-
+<div class="info">
+📞 8825253574 <br>
+📍 Behind Pal Satabdi Mall, Windsome Park Rd, Saguna More, Danapur, Patna - 801503
 </div>
 
-<script>
-
-function order(){
-  let name = document.getElementById("name").value;
-  let address = document.getElementById("address").value;
-  let med = document.getElementById("medicine").value;
-
-  if(name==""||address==""||med==""){
-    alert("Sab details bhar bhai!");
-    return;
-  }
-
-  alert("✅ Order Placed!");
-
-  let msg = "New Order%0AName: "+name+"%0AAddress: "+address+"%0AMedicine: "+med;
-  let link = "https://wa.me/918825253574?text=" + msg;
-
-  document.getElementById("waLink").href = link;
-}
-
-function bill(){
-  let n = document.getElementById("billName").value;
-  let m = document.getElementById("billMed").value;
-  let p = document.getElementById("billPrice").value;
-
-  if(n==""||m==""||p==""){
-    alert("Sab fill karo!");
-    return;
-  }
-
-  document.getElementById("output").innerHTML =
-  "🧾 Customer: "+n+"<br>💊 Medicine: "+m+"<br>💰 Total: ₹"+p;
-}
-
-</script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Aditya Medico</title>
-
-  <!-- ICON -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: #f5f5f5;
-    }
-
-    header {
-      background: #2e7d32;
-      color: white;
-      padding: 15px;
-      text-align: center;
-    }
-
-    .search {
-      padding: 10px;
-      background: white;
-      text-align: center;
-    }
-
-    .search input {
-      width: 90%;
-      padding: 10px;
-      border-radius: 20px;
-      border: 1px solid gray;
-    }
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      padding: 15px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 10px;
-      padding: 10px;
-      text-align: center;
-      box-shadow: 0 0 5px gray;
-    }
-
-    .card img {
-      width: 100px;
-      height: 100px;
-    }
-
-    .price {
-      color: green;
-      font-weight: bold;
-    }
-
-    button {
-      background: #2e7d32;
-      color: white;
-      border: none;
-      padding: 8px;
-      border-radius: 5px;
-      margin-top: 5px;
-      width: 100%;
-    }
-
-    .orderBox {
-      padding: 15px;
-      background: white;
-      margin: 10px;
-      border-radius: 10px;
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <h2>🏥 Aditya Medico</h2>
-  <p>📞 8825253574</p>
-</header>
-
-<div class="search">
-  <input type="text" placeholder="Search Medicine...">
+<div class="search-box">
+<input type="text" placeholder="Search medicine...">
+<button>Search</button>
 </div>
 
-<!-- PRODUCTS -->
 <div class="products">
 
-  <div class="card">
-    <img src="https://via.placeholder.com/100">
-    <h4>Dolo 650</h4>
-    <p class="price">₹30</p>
-    <button onclick="add('Dolo 650')">Add</button>
-  </div>
+<div class="card">
+<img src="https://via.placeholder.com/150">
+<h4>Paracetamol</h4>
+<p>₹30</p>
+<button class="btn">Order</button>
+</div>
 
-  <div class="card">
-    <img src="https://via.placeholder.com/100">
-    <h4>Paracetamol</h4>
-    <p class="price">₹20</p>
-    <button onclick="add('Paracetamol')">Add</button>
-  </div>
+<div class="card">
+<img src="https://via.placeholder.com/150">
+<h4>Cough Syrup</h4>
+<p>₹120</p>
+<button class="btn">Order</button>
+</div>
 
-  <div class="card">
-    <img src="https://via.placeholder.com/100">
-    <h4>Cough Syrup</h4>
-    <p class="price">₹80</p>
-    <button onclick="add('Cough Syrup')">Add</button>
-  </div>
+<div class="card">
+<img src="https://via.placeholder.com/150">
+<h4>Vitamin Tablets</h4>
+<p>₹80</p>
+<button class="btn">Order</button>
+</div>
 
-  <div class="card">
-    <img src="https://via.placeholder.com/100">
-    <h4>ORS</h4>
-    <p class="price">₹25</p>
-    <button onclick="add('ORS')">Add</button>
-  </div>
+<div class="card">
+<img src="https://via.placeholder.com/150">
+<h4>ORS</h4>
+<p>₹20</p>
+<button class="btn">Order</button>
+</div>
 
 </div>
 
-<!-- ORDER -->
-<div class="orderBox">
-  <h3>🛒 Your Order</h3>
-  <p id="cart"></p>
+<footer>
+© 2026 Aditya Medico | All Rights Reserved
+</footer>
 
-  <input id="name" placeholder="Your Name"><br><br>
-  <input id="address" placeholder="Address"><br><br>
-
-  <button onclick="send()">📲 Order on WhatsApp</button>
 </div>
-
-<script>
-let cart = [];
-
-function add(item){
-  cart.push(item);
-  document.getElementById("cart").innerHTML = cart.join(", ");
-}
-
-function send(){
-  let name = document.getElementById("name").value;
-  let address = document.getElementById("address").value;
-
-  if(cart.length==0){
-    alert("Kuch add karo bhai");
-    return;
-  }
-
-  let msg = "Order%0AName: "+name+"%0AAddress: "+address+"%0AMedicine: "+cart.join(", ");
-  let link = "https://wa.me/918825253574?text="+msg;
-
-  window.open(link);
-}
-</script>
 
 </body>
 </html>
