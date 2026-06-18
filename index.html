@@ -6,68 +6,85 @@
 <title>Aditya Medico</title>
 
 <style>
-body {
-    margin: 0;
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
     font-family: Arial;
-    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-    color: white;
+    background:#eef2f3;
 }
 
-header {
-    text-align: center;
-    padding: 20px;
+/* Header */
+header{
+    background:#0f9d58;
+    color:white;
+    text-align:center;
+    padding:15px;
 }
 
-header h1 {
-    color: #00ffcc;
-    font-size: 32px;
+/* Banner */
+.banner{
+    background:#ffcc00;
+    text-align:center;
+    padding:10px;
+    font-weight:bold;
 }
 
-.info {
-    text-align: center;
-    padding: 15px;
-    background: rgba(255,255,255,0.1);
-    margin: 10px;
-    border-radius: 10px;
+/* Info */
+.info{
+    background:white;
+    margin:10px;
+    padding:10px;
+    border-radius:8px;
+    text-align:center;
 }
 
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
-    gap: 15px;
-    padding: 15px;
+/* Products */
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:12px;
+    padding:10px;
 }
 
-.card {
-    background: white;
-    color: black;
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
+.card{
+    background:white;
+    border-radius:8px;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
 }
 
-.card img {
-    width: 100%;
-    height: 120px;
-    object-fit: cover;
+.card img{
+    width:100%;
+    height:120px;
+    object-fit:cover;
+    border-radius:5px;
 }
 
-button {
-    background: green;
-    color: white;
-    border: none;
-    padding: 8px;
-    width: 100%;
-    margin-top: 5px;
-    cursor: pointer;
-    border-radius: 5px;
+.price{
+    color:green;
+    font-weight:bold;
 }
 
-button:hover {
-    background: darkgreen;
+button{
+    background:#0f9d58;
+    color:white;
+    border:none;
+    padding:8px;
+    width:100%;
+    margin-top:5px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+/* Footer */
+footer{
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:10px;
 }
 </style>
-
 </head>
 
 <body>
@@ -77,45 +94,55 @@ button:hover {
 <p>All Medicines Available</p>
 </header>
 
-<div class="info">
-<p>📞 8825253574</p>
-<p>📍 Saguna More, Danapur, Patna</p>
+<div class="banner">
+🚑 24x7 Service | 💊 Home Delivery Available
 </div>
 
-<h2 style="text-align:center;">Products</h2>
+<div class="info">
+<p>📞 8825253574</p>
+<p>📍 Behind Pal Satabdi Mall, Saguna More, Danapur, Patna</p>
+</div>
 
 <div class="products">
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1588776814546-ec7e7c8f6f9e">
+<img src="https://via.placeholder.com/150">
 <p>Paracetamol</p>
+<p class="price">₹20</p>
 <button onclick="order('Paracetamol')">Order</button>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b">
+<img src="https://via.placeholder.com/150">
 <p>Cough Syrup</p>
+<p class="price">₹80</p>
 <button onclick="order('Cough Syrup')">Order</button>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1585435557343-3b092031a831">
+<img src="https://via.placeholder.com/150">
 <p>Vitamin Tablets</p>
+<p class="price">₹120</p>
 <button onclick="order('Vitamin Tablets')">Order</button>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2">
+<img src="https://via.placeholder.com/150">
 <p>Injection</p>
+<p class="price">₹50</p>
 <button onclick="order('Injection')">Order</button>
 </div>
 
 </div>
 
+<footer>
+<p>© 2026 Aditya Medico</p>
+</footer>
+
 <script>
 function order(item){
     let phone = "918825253574";
-    let msg = "I want to order " + item;
+    let msg = encodeURIComponent("Hello, I want to order " + item);
     window.open("https://wa.me/" + phone + "?text=" + msg);
 }
 </script>
