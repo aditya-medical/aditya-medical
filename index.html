@@ -437,7 +437,89 @@ Up to 25% discount on medicines.
 </div>
 
 </section>
+<section class="section" id="medicines">
 
+<h2 class="section-title">
+💊 Search Medicines
+</h2>
+
+<div style="max-width:700px;margin:auto;margin-bottom:20px;">
+
+<input
+type="text"
+id="medicineSearch"
+placeholder="🔍 Search Medicine..."
+onkeyup="searchMedicine()"
+style="
+width:100%;
+padding:15px;
+border-radius:10px;
+border:1px solid #ddd;
+font-size:16px;
+">
+
+</div>
+
+<div id="medicineList"
+style="
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+columns:2;
+">
+
+<div>Dolo 650</div>
+<div>Crocin</div>
+<div>Paracetamol</div>
+<div>Combiflam</div>
+<div>Azithral 500</div>
+<div>Azee 500</div>
+<div>Amoxycillin</div>
+<div>Cefixime</div>
+<div>Monocef</div>
+<div>Pantoprazole</div>
+<div>Pan 40</div>
+<div>Gelusil</div>
+<div>Digene</div>
+<div>Cetirizine</div>
+<div>Levocet</div>
+<div>Ascoril</div>
+<div>Benadryl</div>
+<div>Sinarest</div>
+<div>Metformin</div>
+<div>Glycomet</div>
+<div>Glimepiride</div>
+<div>Telmisartan</div>
+<div>Amlodipine</div>
+<div>Losartan</div>
+<div>Ecosprin</div>
+<div>Atorvastatin</div>
+<div>Shelcal</div>
+<div>Supradyn</div>
+<div>Zincovit</div>
+<div>Becosules</div>
+<div>ORS</div>
+<div>Electral</div>
+<div>Volini</div>
+<div>Betadine</div>
+<div>Savlon</div>
+<div>Dettol</div>
+<div>Bandage</div>
+<div>Cotton</div>
+<div>Syringe</div>
+<div>Gloves</div>
+<div>tetnus</div>
+<div>Calpol</div>
+<div>Augmentin</div>
+<div>Taxim O</div>
+<div>Omez</div>
+<div>Rabekind</div>
+<div>Meftal Spas</div>
+
+</div>
+
+</section>
 <section class="section" id="gallery">
 
 <h2 class="section-title">
@@ -607,6 +689,28 @@ class="whatsapp-bar">
 </a>
 
 </div>
+<script>
+function searchMedicine() {
 
+let input =
+document.getElementById("medicineSearch")
+.value.toLowerCase();
+
+let medicines =
+document.querySelectorAll("#medicineList div");
+
+medicines.forEach(function(item){
+
+if(item.innerText.toLowerCase().includes(input)){
+item.style.display = "block";
+}
+else{
+item.style.display = "none";
+}
+
+});
+
+}
+</script>
 </body>
 </html>
