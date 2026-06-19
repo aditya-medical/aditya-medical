@@ -225,6 +225,13 @@ z-index:1000;
 display:none;
 }
 
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:15px;margin-top:20px}
+.stat{background:white;padding:20px;border-radius:15px;text-align:center;box-shadow:0 5px 15px rgba(0,0,0,.08);transition:.3s}
+.stat:hover{transform:translateY(-5px)}
+.emergency-banner{background:#dc2626;color:white;text-align:center;padding:12px;font-weight:600}
+.prescription-box{background:white;padding:35px;border-radius:18px;text-align:center;box-shadow:0 5px 20px rgba(0,0,0,.08)}
+
 @media(max-width:768px){
 
 header{
@@ -322,15 +329,17 @@ bottom:75px;
 <div class="offer-banner">
 🎉 Up to 25% Discount on Medicines | 🚚 Fast Home Delivery | 💊 Genuine Medicines Guaranteed
 </div>
+<div class="emergency-banner">🚨 Emergency Medicines Available | Call: 8825253574</div>
 
 <section class="hero" id="home">
 
 <h1>ADITYA MEDICO + OPD</h1>
 
 <p>
-Genuine Medicines • Surgical Products • OPD Facility
-<br>
-📍 Saguna More, Danapur, Patna
+💊 Genuine Medicines<br>
+🚚 Fast Home Delivery in Danapur & Patna<br>
+🩺 OPD Consultation Available<br>
+💰 Up to 25% Discount
 </p>
 
 <div class="hero-buttons">
@@ -390,6 +399,16 @@ Up to 25% discount on medicines.
 
 </section>
 
+<section class="section">
+<h2 class="section-title">Why Customers Trust Us</h2>
+<div class="stats">
+<div class="stat"><h3>100%</h3><p>Genuine Medicines</p></div>
+<div class="stat"><h3>25%</h3><p>Discount Available</p></div>
+<div class="stat"><h3>Fast</h3><p>Home Delivery</p></div>
+<div class="stat"><h3>Daily</h3><p>Customer Support</p></div>
+</div>
+</section>
+
 <section class="section" id="delivery">
 
 <h2 class="section-title">
@@ -402,16 +421,9 @@ Up to 25% discount on medicines.
 <h3>📍 Saguna More</h3>
 </div>
 
-<div class="delivery-card">
-<h3>📍 Danapur</h3>
-</div>
 
 <div class="delivery-card">
-<h3>📍 Khagaul</h3>
-</div>
-
-<div class="delivery-card">
-<h3>📍 Bailey Road</h3>
+<h3>📍 new mainpura kharanja,road</h3>
 </div>
 
 <div class="delivery-card">
@@ -419,7 +431,7 @@ Up to 25% discount on medicines.
 </div>
 
 <div class="delivery-card">
-<h3>📍 Phulwari Sharif</h3>
+<h3>📍 balaji nager,road</h3>
 </div>
 
 </div>
@@ -434,11 +446,11 @@ Up to 25% discount on medicines.
 
 <div class="gallery-grid">
 
-<img src="shop1.jpg" alt="Store Front">
+<a href="shop1.jpg" target="_blank"><img src="shop1.jpg" alt="Store Front"></a>
 
-<img src="shop2.jpg" alt="Medicine Counter">
+<a href="shop2.jpg" target="_blank"><img src="shop2.jpg" alt="Medicine Counter"></a>
 
-<img src="shop3.jpg" alt="Store Interior">
+<a href="shop3.jpg" target="_blank"><img src="shop3.jpg" alt="Store Interior"></a>
 
 </div>
 
@@ -459,7 +471,7 @@ Fast delivery and genuine medicines.
 Very reliable service.
 </p>
 <br>
-<strong>— Amit Kumar</strong>
+<strong>—rajan yadav</strong>
 </div>
 
 <div class="review-card">
@@ -468,7 +480,7 @@ Very reliable service.
 Good discounts and friendly staff.
 </p>
 <br>
-<strong>— Priya Singh</strong>
+<strong>— sangram kumar</strong>
 </div>
 
 <div class="review-card">
@@ -477,11 +489,19 @@ Good discounts and friendly staff.
 Best medical store near Saguna More.
 </p>
 <br>
-<strong>— Ravi Kumar</strong>
+<strong>— rishu kumar</strong>
 </div>
 
 </div>
 
+</section>
+
+<section class="section">
+<div class="prescription-box">
+<h2>📄 Upload Prescription on WhatsApp</h2>
+<p>Send your prescription and get medicine availability instantly.</p><br>
+<a href="https://wa.me/918825253574" target="_blank" class="btn btn-primary">Send Prescription</a>
+</div>
 </section>
 
 <section class="section" id="contact">
@@ -522,7 +542,7 @@ width="100%"
 height="320"
 style="border:0;border-radius:18px;margin-top:20px;"
 loading="lazy">
-</iframe>
+</iframe><div style="text-align:center;margin-top:20px;"><a href="#" class="btn btn-primary">⭐ Rate Us on Google</a></div>
 
 </section>
 
