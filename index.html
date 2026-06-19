@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,35 +6,48 @@
 
 <title>Aditya Medico + OPD | Medical Store in Saguna More Danapur Patna</title>
 
-<meta name="description" content="Aditya Medico + OPD at Saguna More Danapur Patna. Genuine Medicines, Surgical Products, OPD Facility, Home Delivery and Special Discounts Available.">
+<meta name="description"
+content="Aditya Medico + OPD at Saguna More Danapur Patna. Genuine Medicines, Surgical Products, OPD Facility, Home Delivery and Special Discounts Available.">
+
+<meta name="keywords"
+content="Medical Store in Danapur, Medical Store in Saguna More, Pharmacy in Patna, Medicine Home Delivery, Surgical Products, OPD Facility">
+
+<meta name="theme-color" content="#16a34a">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
 }
 
 body{
 background:#f5f8fa;
 color:#333;
+overflow-x:hidden;
 }
 
 header{
 background:linear-gradient(135deg,#0ea5a4,#16a34a);
 color:white;
-padding:20px 8%;
+padding:18px 8%;
 display:flex;
 justify-content:space-between;
 align-items:center;
 flex-wrap:wrap;
+position:sticky;
+top:0;
+z-index:999;
+box-shadow:0 4px 15px rgba(0,0,0,.1);
 }
 
 .logo{
-font-size:28px;
+font-size:26px;
 font-weight:700;
 }
 
@@ -44,12 +56,26 @@ color:white;
 text-decoration:none;
 margin-left:20px;
 font-weight:500;
+transition:.3s;
+}
+
+nav a:hover{
+opacity:.8;
+}
+
+.offer-banner{
+background:#fef3c7;
+color:#92400e;
+padding:12px;
+text-align:center;
+font-weight:600;
+font-size:15px;
 }
 
 .hero{
 padding:120px 8%;
 background:
-linear-gradient(rgba(0,0,0,.10),rgba(0,0,0,.10)),
+linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
 url('shop.jpg');
 background-size:cover;
 background-position:center;
@@ -59,27 +85,34 @@ text-align:center;
 }
 
 .hero h1{
-font-size:48px;
+font-size:52px;
 margin-bottom:15px;
+font-weight:700;
 }
 
 .hero p{
-font-size:18px;
-max-width:700px;
+font-size:20px;
+max-width:750px;
 margin:auto;
+line-height:1.8;
 }
 
 .hero-buttons{
-margin-top:25px;
+margin-top:30px;
 }
 
 .btn{
 display:inline-block;
-padding:12px 24px;
-border-radius:8px;
+padding:14px 28px;
+border-radius:10px;
 text-decoration:none;
 font-weight:600;
-margin:5px;
+margin:6px;
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-3px);
 }
 
 .btn-primary{
@@ -93,80 +126,85 @@ color:#16a34a;
 }
 
 .section{
-padding:70px 8%;
+padding:80px 8%;
 }
 
 .section-title{
 text-align:center;
 font-size:34px;
-margin-bottom:40px;
+margin-bottom:45px;
 color:#0f766e;
 }
 
-.features{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
-
-.feature{
-background:white;
-padding:25px;
-border-radius:15px;
-text-align:center;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
-}
-
-.products{
+.features,
+.delivery-grid,
+.review-grid,
+.gallery-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:25px;
 }
 
-.card{
+.feature,
+.delivery-card,
+.review-card{
 background:white;
-border-radius:15px;
-overflow:hidden;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
+padding:25px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+transition:.3s;
 }
 
-.card img{
+.feature:hover,
+.delivery-card:hover,
+.review-card:hover{
+transform:translateY(-5px);
+}
+
+.gallery-grid img{
 width:100%;
-height:220px;
+height:240px;
 object-fit:cover;
+border-radius:18px;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+transition:.3s;
 }
 
-.card-content{
-padding:20px;
-}
-
-.order-btn{
-display:inline-block;
-margin-top:10px;
-padding:10px 15px;
-background:#16a34a;
-color:white;
-text-decoration:none;
-border-radius:8px;
+.gallery-grid img:hover{
+transform:scale(1.03);
 }
 
 .contact{
 background:white;
-border-radius:15px;
+border-radius:18px;
 padding:35px;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
+box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
 
 .contact p{
 margin:12px 0;
+line-height:1.8;
+}
+
+.cta-box{
+background:white;
+padding:35px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.cta-box h2{
+color:#16a34a;
+margin-bottom:15px;
 }
 
 footer{
 background:#0f172a;
 color:white;
 text-align:center;
-padding:25px;
-margin-top:40px;
+padding:30px;
 }
 
 .whatsapp-float{
@@ -179,98 +217,376 @@ padding:15px 18px;
 border-radius:50px;
 text-decoration:none;
 font-weight:bold;
+box-shadow:0 5px 20px rgba(0,0,0,.2);
+z-index:1000;
+}
+
+.sticky-mobile{
+display:none;
 }
 
 @media(max-width:768px){
+
+header{
+padding:15px;
+}
+
+.logo{
+width:100%;
+text-align:center;
+margin-bottom:10px;
+}
+
+nav{
+width:100%;
+text-align:center;
+}
+
+nav a{
+display:inline-block;
+margin:5px 8px;
+font-size:14px;
+}
+
+.hero{
+padding:90px 5%;
+}
+
 .hero h1{
-font-size:34px;
+font-size:32px;
+}
+
+.hero p{
+font-size:16px;
+}
+
+.section{
+padding:60px 5%;
+}
+
+.section-title{
+font-size:28px;
+}
+
+.sticky-mobile{
+display:flex;
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+z-index:9999;
+}
+
+.sticky-mobile a{
+flex:1;
+padding:15px;
+text-align:center;
+text-decoration:none;
+font-weight:600;
+color:white;
+}
+
+.call-bar{
+background:#16a34a;
+}
+
+.whatsapp-bar{
+background:#25D366;
+}
+
+footer{
+margin-bottom:55px;
+}
+
+.whatsapp-float{
+bottom:75px;
 }
 }
+
 </style>
-
-</head>
-
-<body>
+</head><body>
 
 <header>
 <div class="logo">Aditya Medico + OPD</div>
 
 <nav>
 <a href="#home">Home</a>
-<a href="#products">Products</a>
 <a href="#services">Services</a>
+<a href="#delivery">Delivery</a>
+<a href="#gallery">Gallery</a>
+<a href="#reviews">Reviews</a>
 <a href="#contact">Contact</a>
 </nav>
 </header>
 
+<div class="offer-banner">
+🎉 Up to 25% Discount on Medicines | 🚚 Fast Home Delivery | 💊 Genuine Medicines Guaranteed
+</div>
+
 <section class="hero" id="home">
+
 <h1>ADITYA MEDICO + OPD</h1>
 
 <p>
 Genuine Medicines • Surgical Products • OPD Facility
 <br>
-Saguna More, Danapur, Patna
+📍 Saguna More, Danapur, Patna
 </p>
 
 <div class="hero-buttons">
-<a href="tel:8825253574" class="btn btn-primary">📞 Call Now</a>
-<a href="https://wa.me/918825253574" class="btn btn-secondary">💬 WhatsApp Order</a>
+
+<a href="tel:8825253574"
+class="btn btn-primary">
+📞 Call Now
+</a>
+
+<a href="https://wa.me/918825253574"
+class="btn btn-secondary"
+target="_blank">
+💬 WhatsApp Order
+</a>
+
 </div>
+
 </section>
 
 <section class="section" id="services">
-<h2 class="section-title">Why Choose Us?</h2>
+
+<h2 class="section-title">
+Why Choose Us?
+</h2>
 
 <div class="features">
+
 <div class="feature">
 <h3>💊 Genuine Medicines</h3>
-<p>100% authentic medicines.</p>
+<p>
+100% authentic medicines from trusted suppliers.
+</p>
 </div>
 
 <div class="feature">
 <h3>🚚 Home Delivery</h3>
-<p>Fast medicine delivery.</p>
+<p>
+Quick medicine delivery at your doorstep.
+</p>
 </div>
 
 <div class="feature">
 <h3>🏥 OPD Facility</h3>
-<p>General physician consultation support.</p>
+<p>
+Doctor consultation support available.
+</p>
 </div>
 
 <div class="feature">
 <h3>💰 Special Discounts</h3>
-<p>Up to 25% discount available.</p>
+<p>
+Up to 25% discount on medicines.
+</p>
 </div>
+
 </div>
+
+</section>
+
+<section class="section" id="delivery">
+
+<h2 class="section-title">
+🚚 Delivery Areas
+</h2>
+
+<div class="delivery-grid">
+
+<div class="delivery-card">
+<h3>📍 Saguna More</h3>
+</div>
+
+<div class="delivery-card">
+<h3>📍 Danapur</h3>
+</div>
+
+<div class="delivery-card">
+<h3>📍 Khagaul</h3>
+</div>
+
+<div class="delivery-card">
+<h3>📍 Bailey Road</h3>
+</div>
+
+<div class="delivery-card">
+<h3>📍 RPS More</h3>
+</div>
+
+<div class="delivery-card">
+<h3>📍 Phulwari Sharif</h3>
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="gallery">
+
+<h2 class="section-title">
+📷 Our Store
+</h2>
+
+<div class="gallery-grid">
+
+<img src="shop1.jpg" alt="Store Front">
+
+<img src="shop2.jpg" alt="Medicine Counter">
+
+<img src="shop3.jpg" alt="Store Interior">
+
+</div>
+
+</section>
+
+<section class="section" id="reviews">
+
+<h2 class="section-title">
+⭐ Customer Reviews
+</h2>
+
+<div class="review-grid">
+
+<div class="review-card">
+<h3>⭐⭐⭐⭐⭐</h3>
+<p>
+Fast delivery and genuine medicines.
+Very reliable service.
+</p>
+<br>
+<strong>— Amit Kumar</strong>
+</div>
+
+<div class="review-card">
+<h3>⭐⭐⭐⭐⭐</h3>
+<p>
+Good discounts and friendly staff.
+</p>
+<br>
+<strong>— Priya Singh</strong>
+</div>
+
+<div class="review-card">
+<h3>⭐⭐⭐⭐⭐</h3>
+<p>
+Best medical store near Saguna More.
+</p>
+<br>
+<strong>— Ravi Kumar</strong>
+</div>
+
+</div>
+
 </section>
 
 <section class="section" id="contact">
-<h2 class="section-title">Contact Us</h2>
+
+<h2 class="section-title">
+📞 Contact Us
+</h2>
 
 <div class="contact">
-<p><strong>🏥 Store:</strong> ADITYA MEDICO + OPD</p>
-<p><strong>📞 Mobile:</strong> 8825253574</p>
-<p><strong>📞 Alternate:</strong> 6203090660</p>
-<p><strong>📍 Address:</strong> Behind P&M Mall, Windsome Park Road, Saguna More, Danapur, Patna - 801503</p>
+
+<p>
+<strong>🏥 Store:</strong>
+ADITYA MEDICO + OPD
+</p>
+
+<p>
+<strong>📞 Mobile:</strong>
+8825253574
+</p>
+
+<p>
+<strong>📞 Alternate:</strong>
+6203090660
+</p>
+
+<p>
+<strong>📍 Address:</strong>
+Behind P&M Mall, Windsome Park Road,
+Saguna More, Danapur,
+Patna - 801503
+</p>
+
 </div>
 
 <iframe
 src="https://maps.google.com/maps?q=Saguna%20More%20Danapur%20Patna&t=&z=15&ie=UTF8&iwloc=&output=embed"
 width="100%"
-height="300"
-style="border:0;border-radius:15px;margin-top:20px;"
+height="320"
+style="border:0;border-radius:18px;margin-top:20px;"
 loading="lazy">
 </iframe>
 
 </section>
 
+<section class="section">
+
+<div class="cta-box">
+
+<h2>
+Need Medicines Urgently?
+</h2>
+
+<p>
+📞 Call Now or Order Directly on WhatsApp
+</p>
+
+<br>
+
+<a href="tel:8825253574"
+class="btn btn-primary">
+📞 Call Now
+</a>
+
+<a href="https://wa.me/918825253574"
+target="_blank"
+class="btn btn-secondary">
+💬 WhatsApp Order
+</a>
+
+</div>
+
+</section>
+
 <footer>
-<p>© 2026 ADITYA MEDICO + OPD</p>
+
+<p>
+© 2026 Aditya Medico + OPD
+</p>
+
+<p style="margin-top:10px;">
+Serving Saguna More • Danapur • Patna
+</p>
+
 </footer>
 
-<a href="https://wa.me/918825253574" class="whatsapp-float">
-WhatsApp
+<a href="https://wa.me/918825253574"
+target="_blank"
+class="whatsapp-float">
+💬 WhatsApp
 </a>
+
+<div class="sticky-mobile">
+
+<a href="tel:8825253574"
+class="call-bar">
+📞 Call
+</a>
+
+<a href="https://wa.me/918825253574"
+target="_blank"
+class="whatsapp-bar">
+💬 WhatsApp
+</a>
+
+</div>
 
 </body>
 </html>
