@@ -535,6 +535,7 @@ font-size:16px;
 
 <div id="medicineList"
 style="
+display:none;
 background:white;
 padding:25px;
 border-radius:15px;
@@ -771,8 +772,18 @@ let input =
 document.getElementById("medicineSearch")
 .value.toLowerCase();
 
+let medicineList =
+document.getElementById("medicineList");
+
 let medicines =
 document.querySelectorAll("#medicineList div");
+
+if(input === ""){
+medicineList.style.display = "none";
+return;
+}
+
+medicineList.style.display = "block";
 
 medicines.forEach(function(item){
 
