@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya Medico + OPD - Online Order</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#eef5f1}
+header{background:#0f5132;color:#fff;padding:18px;text-align:center;position:sticky;top:0}
+.search,.details input{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px}
+.container{padding:15px}
+.categories{display:flex;gap:8px;overflow:auto;margin:15px 0}
+.categories button,.btn{background:#198754;color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.card{background:#fff;padding:12px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.cart,.details{background:#fff;padding:15px;border-radius:12px;margin-top:15px}
+.qtybtn{padding:3px 8px;margin:0 4px}
+</style>
+</head>
+<body>
+<header>
+<h2>💊 Aditya Medico + OPD</h2>
+<p>Online Medicine Ordering</p>
+</header>
+
+<div class="container">
+<input class="search" id="search" placeholder="Search Medicine..." onkeyup="render()">
+
+<div class="categories">
+<button onclick="filterCat('All')">All</button>
+<button onclick="filterCat('Fever')">Fever</button>
+<button onclick="filterCat('Antibiotics')">Antibiotics</button>
+<button onclick="filterCat('BP')">BP</button>
+<button onclick="filterCat('Diabetes')">Diabetes</button>
+<button onclick="filterCat('Vitamins')">Vitamins</button>
+<button onclick="filterCat('Baby Care')">Baby Care</button>
+<button onclick="filterCat('First Aid')">First Aid</button>
+</div>
+
+<div class="grid" id="products"></div>
+
+<div class="cart">
+<h3>🛒 Cart</h3>
+<div id="cart"></div>
+<h3>Total ₹ <span id="total">0</span></h3>
+</div>
+
+<div class="details">
+<h3>📦 Delivery Details</h3>
+<input id="name" placeholder="Your Name"><br><br>
+<input id="phone" placeholder="Phone Number"><br><br>
+<input id="address" placeholder="Address"><br><br>
+<button class="btn" onclick="order()">💬 Order on WhatsApp</button>
+</div>
+</div>
+
+<script>
+const products=[
+{name:'Dolo 650',price:30,cat:'Fever'},
+{name:'Crocin',price:25,cat:'Fever'},
+{name:'Azithral 500',price:120,cat:'Antibiotics'},
+{name:'Cefixime',price:140,cat:'Antibiotics'},
+{name:'Telmisartan',price:90,cat:'BP'},
+{name:'Amlodipine',price:75,cat:'BP'},
+{name:'Metformin',price:80,cat:'Diabetes'},
+{name:'Glycomet',price:85,cat:'Diabetes'},
+{name:'Supradyn',price:110,cat:'Vitamins'},
+{name:'Zincovit',price:95,cat:'Vitamins'},
+{name:'Pampers',price:250,cat:'Baby Care'},
+{name:'Dexolac',price:350,cat:'Baby Care'},
+{name:'Dettol',price:60,cat:'First Aid'},
+{name:'Bandage',price:20,cat:'First Aid'}
+];
+
+let current='All';
+let cart=JSON.parse(localStorage.getItem('cart')||'[]');
+
+function filterCat(c){current=c;render();}
+
+function render(){
+let s=document.getElementById('search').value.toLowerCase();
+let out='';
+products.filter(p=>(current==='All'||p.cat===current)&&p.name.toLowerCase().includes(s))
+.forEach((p,i)=>{
+out+=`<div class="card"><h4>${p.name}</h4><p>${p.cat}</p><p>₹${p.price}</p>
+<button class="btn" onclick="add('${p.name}')">Add</button></div>`;
+});
+document.getElementById('products').innerHTML=out;
+updateCart();
+}
+
+function add(name){
+let item=cart.find(x=>x.name===name);
+let p=products.find(x=>x.name===name);
+if(item){item.qty++;}else{cart.push({...p,qty:1});}
+save();
+}
+
+function change(name,val){
+let item=cart.find(x=>x.name===name);
+if(!item)return;
+item.qty+=val;
+if(item.qty<=0)cart=cart.filter(x=>x.name!==name);
+save();
+}
+
+function save(){
+localStorage.setItem('cart',JSON.stringify(cart));
+updateCart();
+}
+
+function updateCart(){
+let html=''; let total=0;
+cart.forEach(i=>{
+total+=i.price*i.qty;
+html+=`<div>${i.name} ₹${i.price} x ${i.qty}
+<button class='qtybtn' onclick="change('${i.name}',1)">+</button>
+<button class='qtybtn' onclick="change('${i.name}',-1)">-</button>
+</div>`;
+});
+document.getElementById('cart').innerHTML=html||'Cart Empty';
+document.getElementById('total').innerText=total;
+}
+
+function order(){
+if(cart.length===0){alert('Cart Empty');return;}
+let msg='Aditya Medico Order\n\n';
+cart.forEach(i=>msg+=`${i.name} x ${i.qty} = ₹${i.price*i.qty}\n`);
+msg+=`\nTotal: ₹${document.getElementById('total').innerText}`;
+msg+=`\nName: ${name.value}`;
+msg+=`\nPhone: ${phone.value}`;
+msg+=`\nAddress: ${address.value}`;
+window.open('https://wa.me/918825253574?text='+encodeURIComponent(msg));
+}
+render();
+</script>
+</body>
+</html>
