@@ -83,7 +83,15 @@ color:white;
 }
 
 @media(max-width:768px){
+#medicineList{
+columns:2;
+}
 
+@media(max-width:768px){
+#medicineList{
+columns:1;
+}
+}
 .menu-toggle{
 display:block;
 }
@@ -379,15 +387,28 @@ bottom:75px;
  "url":"https://aditya-medical.github.io/aditya-medical/"
 }
 </script>
+<meta property="og:site_name"
+content="Aditya Medico + OPD">
 
+<meta property="og:locale"
+content="en_IN">
 </head>
 <body>
 
 <header>
+
 <div class="logo">Aditya Medico + OPD</div>
+
+<div class="header-search">
+<input type="text"
+placeholder="Search Medicine..."
+onkeyup="searchMedicineHeader(this.value)">
+</div>
+
 <div class="menu-toggle" onclick="toggleMenu()">
 ☰
 </div>
+
 <nav id="navbar">
 <a href="#home">Home</a>
 <a href="#services">Services</a>
@@ -409,7 +430,6 @@ bottom:75px;
 <h1>
 Your Trusted Healthcare Partner
 </h1>
-<p>
 <p>
 Premium Pharmacy & Healthcare Services in Saguna More, Danapur Patna.
 Fast Delivery, Genuine Medicines, Expert Support & OPD Facility.
@@ -658,7 +678,9 @@ Best medical store near Saguna More.
 <div class="prescription-box">
 <h2>📄 Upload Prescription on WhatsApp</h2>
 <p>Send your prescription and get medicine availability instantly.</p><br>
-<a href="https://wa.me/918825253574" target="_blank" class="btn btn-primary">Send Prescription</a>
+<a href="https://share.google/w2R0YugAiYqn33ZRH"
+target="_blank"
+class="btn btn-primary">
 </div>
 </section>
 
@@ -695,8 +717,7 @@ Patna - 801503
 </div>
 
 <iframe
-src="https://maps.google.com/maps?q=Saguna%20More%20Danapur%20Patna&t=&z=15&ie=UTF8&iwloc=&output=embed"
-width="100%"
+src="https://share.google/jHtNXNUfG2BrIY6pK
 height="320"
 style="border:0;border-radius:18px;margin-top:20px;"
 loading="lazy">
@@ -744,7 +765,13 @@ Serving Saguna More • Danapur • Patna
 </p>
 
 </footer>
-
+.header-search input{
+padding:10px;
+border:none;
+border-radius:8px;
+width:220px;
+outline:none;
+}
 <a href="https://wa.me/918825253574"
 target="_blank"
 class="whatsapp-float">
@@ -802,6 +829,11 @@ item.style.display = "none";
 function toggleMenu(){
 document.getElementById("navbar")
 .classList.toggle("active");
+}
+<script>
+function searchMedicineHeader(value){
+document.getElementById("medicineSearch").value=value;
+searchMedicine();
 }
 </script>
 </body>
