@@ -195,32 +195,38 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-window.login = async function(){
+window.addMedicine = async function(){
 
 try{
 
-await signInWithEmailAndPassword(
-auth,
-email.value,
-password.value
+const medicineData = {
+name: document.getElementById("name").value || "",
+price: document.getElementById("price").value || "",
+discount: document.getElementById("discount").value || "",
+category: document.getElementById("category").value || "",
+image: document.getElementById("image").value || ""
+};
+
+await addDoc(
+collection(db,"medicines"),
+medicineData
 );
 
-document.getElementById("loginBox").style.display="none";
-document.getElementById("adminPanel").style.display="block";
+alert("Medicine Added Successfully");
 
 loadMedicines();
 
-alert("Login Success");
-
 }
 catch(e){
+
+console.error(e);
 alert(e.message);
-}
 
 }
 
-window.addMedicine = async function(){
+};
 
+async function loadMedicines(){
 try{
 
 const medicineData = {
