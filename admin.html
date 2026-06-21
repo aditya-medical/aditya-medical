@@ -220,36 +220,37 @@ alert(e.message);
 }
 
 window.addMedicine = async function(){
-console.log({
-name:name.value,
-price:price.value,
-discount:discount.value,
-category:category.value,
-image:image.value
-});
+
 try{
 
-await addDoc(collection(db,"medicines"),{
-name:name.value,
-price:price.value,
-discount:discount.value,
-category:category.value,
-image:image.value
-});
+const medicineData = {
+name: document.getElementById("name").value || "",
+price: document.getElementById("price").value || "",
+discount: document.getElementById("discount").value || "",
+category: document.getElementById("category").value || "",
+image: document.getElementById("image").value || ""
+};
 
-alert("Medicine Added");
+console.log(medicineData);
 
-name.value="";
-price.value="";
-discount.value="";
-category.value="";
-image.value="";
+await addDoc(
+collection(db,"medicines"),
+medicineData
+);
+
+alert("Medicine Added Successfully");
 
 loadMedicines();
 
 }
 catch(e){
+
+console.error(e);
+
 alert(e.message);
+
+}
+
 }
 
 }
