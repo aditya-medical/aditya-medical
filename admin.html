@@ -1,327 +1,173 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aditya Medico Admin</title>
-
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins,sans-serif;
-}
-
-body{
-background:#f1f5f9;
-padding:20px;
-}
-
-.container{
-max-width:1100px;
-margin:auto;
-}
-
-.card{
-background:white;
-padding:20px;
-border-radius:15px;
-box-shadow:0 5px 15px rgba(0,0,0,.1);
-margin-bottom:20px;
-}
-
-h1{
-text-align:center;
-color:#16a34a;
-margin-bottom:20px;
-}
-
-input{
-width:100%;
-padding:12px;
-margin:8px 0;
-border:1px solid #ddd;
-border-radius:8px;
-}
-
-button{
-padding:12px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-weight:bold;
-}
-
-.login-btn,
-.add-btn{
-width:100%;
-background:#16a34a;
-color:white;
-}
-
-.delete-btn{
-background:#dc2626;
-color:white;
-margin-top:10px;
-width:100%;
-}
-
-.medicine-grid{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-gap:15px;
-margin-top:20px;
-}
-
-.medicine-card{
-background:white;
-padding:15px;
-border-radius:12px;
-box-shadow:0 3px 10px rgba(0,0,0,.08);
-}
-
-.medicine-card img{
-width:100%;
-height:150px;
-object-fit:cover;
-border-radius:10px;
-}
-
-.price{
-text-decoration:line-through;
-color:red;
-}
-
-.discount{
-color:green;
-font-weight:bold;
-font-size:18px;
-}
-
-#adminPanel{
-display:none;
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<h1>🏥 Aditya Medico Admin Panel</h1>
-
-<div class="card" id="loginBox">
-
-<h2>Admin Login</h2>
-
-<input id="email" placeholder="Email">
-
-<input id="password" type="password" placeholder="Password">
-
-<button id="loginBtn" class="login-btn">
-🔐 Login
-</button>
-
-</div>
-
-<div id="adminPanel">
-
-<div class="card">
-
-<h2>➕ Add Medicine</h2>
-
-<input id="name" placeholder="Medicine Name">
-
-<input id="price" placeholder="Original Price">
-  
-<input id="discount" placeholder="Discount Price">
-  
-<input id="category" placeholder="Category">
-
-<input id="image" placeholder="Image URL">
-
-<button class="add-btn" onclick="addMedicine()">
-➕ Add Medicine
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>📦 All Medicines</h2>
-
-<input
-id="search"
-placeholder="Search Medicine"
-onkeyup="loadMedicines()">
-
-<div id="medicineList" class="medicine-grid"></div>
-
-</div>
-
-</div>
-
 <script type="module">
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-getAuth,
-signInWithEmailAndPassword
+  getAuth,
+  signInWithEmailAndPassword
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
-getFirestore,
-collection,
-addDoc,
-getDocs,
-deleteDoc,
-doc
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 const firebaseConfig = {
-apiKey: "AIzaSyAb7OAM7sTbPyXK90YPVcGKaSwrEVMNkaw",
-authDomain: "aditya-medico.firebaseapp.com",
-projectId: "aditya-medico",
-storageBucket: "aditya-medico.firebasestorage.app",
-messagingSenderId: "733161976762",
-appId: "1:733161976762:web:df982e69a1015cc52c6383"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "aditya-medico.firebaseapp.com",
+  projectId: "aditya-medico",
+  storageBucket: "aditya-medico.firebasestorage.app",
+  messagingSenderId: "733161976762",
+  appId: "1:733161976762:web:df982e69a1015cc52c6383"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-window.addMedicine = async function(){
+/* LOGIN */
 
-try{
+window.login = async function () {
 
-const medicineData = {
-name: document.getElementById("name").value || "",
-price: document.getElementById("price").value || "",
-discount: document.getElementById("discount").value || "",
-category: document.getElementById("category").value || "",
-image: document.getElementById("image").value || ""
+  try {
+
+    await signInWithEmailAndPassword(
+      auth,
+      document.getElementById("email").value,
+      document.getElementById("password").value
+    );
+
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("adminPanel").style.display = "block";
+
+    loadMedicines();
+
+    alert("Login Success");
+
+  } catch (e) {
+
+    alert(e.message);
+
+  }
+
 };
 
-await addDoc(
-collection(db,"medicines"),
-medicineData
-);
+document.getElementById("loginBtn")
+.addEventListener("click", window.login);
 
-alert("Medicine Added Successfully");
+/* ADD MEDICINE */
 
-loadMedicines();
+window.addMedicine = async function () {
 
-}
-catch(e){
+  try {
 
-console.error(e);
-alert(e.message);
+    const medicineData = {
+      name: document.getElementById("name").value,
+      price: document.getElementById("price").value,
+      discount: document.getElementById("discount").value,
+      category: document.getElementById("category").value,
+      image: document.getElementById("image").value
+    };
 
-}
+    await addDoc(
+      collection(db, "medicines"),
+      medicineData
+    );
 
+    alert("Medicine Added Successfully");
 
-async function loadMedicines(){
-try{
+    loadMedicines();
 
-const medicineData = {
-name: document.getElementById("name").value || "",
-price: document.getElementById("price").value || "",
-discount: document.getElementById("discount").value || "",
-category: document.getElementById("category").value || "",
-image: document.getElementById("image").value || ""
+    document.getElementById("name").value = "";
+    document.getElementById("price").value = "";
+    document.getElementById("discount").value = "";
+    document.getElementById("category").value = "";
+    document.getElementById("image").value = "";
+
+  } catch (e) {
+
+    console.error(e);
+    alert(e.message);
+
+  }
+
 };
 
-console.log(medicineData);
+/* LOAD MEDICINES */
 
-await addDoc(
-collection(db,"medicines"),
-medicineData
-);
+window.loadMedicines = async function () {
 
-alert("Medicine Added Successfully");
+  const search =
+    document.getElementById("search").value.toLowerCase();
 
-loadMedicines();
+  const snap =
+    await getDocs(collection(db, "medicines"));
 
-}
-catch(e){
+  let html = "";
 
-console.error(e);
+  snap.forEach((d) => {
 
-alert(e.message);
+    const m = d.data();
 
-}
+    if (
+      !(m.name || "")
+      .toLowerCase()
+      .includes(search)
+    ) return;
 
-}
+    html += `
+      <div class="medicine-card">
 
-}
-async function loadMedicines(){
+        <img src="${m.image}" alt="${m.name}">
 
-const search =
-document.getElementById("search").value.toLowerCase();
+        <h3>${m.name}</h3>
 
-const snap =
-await getDocs(collection(db,"medicines"));
+        <p>${m.category}</p>
 
-let html="";
+        <p>
+          <span class="price">
+            ₹${m.price}
+          </span>
+        </p>
 
-snap.forEach((d)=>{
+        <p class="discount">
+          ₹${m.discount}
+        </p>
 
-const m=d.data();
+        <button
+          class="delete-btn"
+          onclick="deleteMedicine('${d.id}')">
+          🗑 Delete
+        </button>
 
-if(
-!m.name.toLowerCase().includes(search)
-) return;
+      </div>
+    `;
 
-html+=`
-<div class="medicine-card">
+  });
 
-<img src="${m.image}">
+  document.getElementById("medicineList").innerHTML = html;
 
-<h3>${m.name}</h3>
+};
 
-<p>${m.category}</p>
+/* DELETE MEDICINE */
 
-<p>
-<span class="price">
-₹${m.price}
-</span>
-</p>
+window.deleteMedicine = async function (id) {
 
-<p class="discount">
-₹${m.discount}
-</p>
+  if (!confirm("Delete Medicine?")) return;
 
-<button
-class="delete-btn"
-onclick="deleteMedicine('${d.id}')">
-🗑 Delete
-</button>
+  await deleteDoc(
+    doc(db, "medicines", id)
+  );
 
-</div>
-`;
+  loadMedicines();
 
-});
-
-document.getElementById("medicineList").innerHTML=html;
-
-}
-
-window.deleteMedicine = async function(id){
-
-if(!confirm("Delete Medicine?")) return;
-
-await deleteDoc(doc(db,"medicines",id));
-
-loadMedicines();
-
-}
+};
 
 </script>
-
-</body>
-</html>
