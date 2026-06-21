@@ -441,9 +441,25 @@ target="_blank">
 Why Choose Us?
 </h2>
 
-<div class="features">
+<section class="section" id="medicines">
 
-<div class="feature">
+<h2 class="section-title">
+💊 Search Medicines
+</h2>
+
+<input
+id="medicineSearch"
+type="text"
+placeholder="Search Medicine..."
+onkeyup="searchMedicine()"
+style="
+width:100%;
+padding:15px;
+border:1px solid #ddd;
+border-radius:10px;
+margin-bottom:20px;
+font-size:16px;
+">
 <h3>💊 Genuine Medicines</h3>
 <p>
 100% authentic medicines from trusted suppliers.
@@ -525,11 +541,7 @@ border-radius:15px;
 box-shadow:0 5px 15px rgba(0,0,0,.08);
 columns:2;
 ">
-<div class="header-search">
-<input type="text"
-placeholder="Search Medicine..."
-onkeyup="searchMedicineHeader(this.value)">
-</div>
+
 <div>Dolo 650</div>
 <div>Crocin</div>
 <div>Paracetamol</div>
@@ -595,7 +607,6 @@ onkeyup="searchMedicineHeader(this.value)">
 </div>
 </section>
  
-</section>
 <section class="section" id="gallery">
 
 <h2 class="section-title">
