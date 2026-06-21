@@ -220,7 +220,13 @@ alert(e.message);
 }
 
 window.addMedicine = async function(){
-
+console.log({
+name:name.value,
+price:price.value,
+discount:discount.value,
+category:category.value,
+image:image.value
+});
 try{
 
 await addDoc(collection(db,"medicines"),{
