@@ -66,11 +66,59 @@ function filterCat(c){current=c;render();}
 function render(){
 let s=document.getElementById('search').value.toLowerCase();
 let out='';
-products.filter(p=>(current==='All'||p.cat===current)&&p.name.toLowerCase().includes(s))
-.forEach((p,i)=>{
+function render(){
+
+let s=document.getElementById('search').value.toLowerCase();
+
+let out='';
+
+products
+.filter(p=>
+(current==='All'||p.cat===current)
+&&
+p.name.toLowerCase().includes(s)
+)
+.forEach((p)=>{
+
 out+=`
 <div class="card">
 
+<img
+src="${p.image}"
+style="
+width:100%;
+height:150px;
+object-fit:cover;
+border-radius:10px;
+">
+
+<h4>${p.name}</h4>
+
+<p>${p.cat}</p>
+
+<p>
+<del>₹${p.price}</del>
+<b style="color:green">
+₹${p.discount}
+</b>
+</p>
+
+<button
+class="btn"
+onclick="add('${p.name}')">
+🛒 Add To Cart
+</button>
+
+</div>
+`;
+
+});
+
+document.getElementById('products').innerHTML=out;
+
+updateCart();
+
+}
 <img
 src="${p.image}"
 style="
@@ -126,8 +174,8 @@ updateCart();
 function updateCart(){
 let html=''; let total=0;
 cart.forEach(i=>{
-total+=i.price*i.qty;
-html+=`<div>${i.name} ₹${i.price} x ${i.qty}
+total+=(i.discount || i.price)*i.qty;
+html+=`<div>${i.name} ₹${i.discount || i.price} x ${i.qty}
 <button class='qtybtn' onclick="change('${i.name}',1)">+</button>
 <button class='qtybtn' onclick="change('${i.name}',-1)">-</button>
 </div>`;
