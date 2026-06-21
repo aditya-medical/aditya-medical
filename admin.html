@@ -46,7 +46,13 @@ margin:auto;
 <h2>Add Medicine</h2>
 
 <input id="name" placeholder="Medicine Name">
-<input id="price" placeholder="Price">
+
+<input id="price" placeholder="Original Price">
+
+<input id="discount" placeholder="Discount Price">
+
+<input id="category" placeholder="Category">
+
 <input id="image" placeholder="Image URL">
 
 <button onclick="addMedicine()">Add Medicine</button>
@@ -111,6 +117,8 @@ collection(db,"medicines"),
 {
 name:document.getElementById("name").value,
 price:document.getElementById("price").value,
+discount:document.getElementById("discount").value,
+category:document.getElementById("category").value,
 image:document.getElementById("image").value
 }
 );
