@@ -1,0 +1,131 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Aditya Medico Admin</title>
+<style>
+body{
+font-family:Arial;
+padding:20px;
+background:#f5f5f5;
+}
+input,button{
+width:100%;
+padding:12px;
+margin:8px 0;
+}
+button{
+background:#16a34a;
+color:white;
+border:none;
+cursor:pointer;
+}
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+max-width:500px;
+margin:auto;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+<h2>Admin Login</h2>
+
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+<hr>
+
+<h2>Add Medicine</h2>
+
+<input id="name" placeholder="Medicine Name">
+<input id="price" placeholder="Price">
+<input id="image" placeholder="Image URL">
+
+<button onclick="addMedicine()">Add Medicine</button>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getAuth,
+signInWithEmailAndPassword
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+getFirestore,
+collection,
+addDoc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyAb7OAM7sTbPyXK90YPVcGKaSwrEVMNkaw",
+authDomain: "aditya-medico.firebaseapp.com",
+projectId: "aditya-medico",
+storageBucket: "aditya-medico.firebasestorage.app",
+messagingSenderId: "733161976762",
+appId: "1:733161976762:web:df982e69a1015cc52c6383"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+window.login = async function(){
+
+try{
+
+await signInWithEmailAndPassword(
+auth,
+document.getElementById("email").value,
+document.getElementById("password").value
+);
+
+alert("Login Success");
+
+}
+catch(e){
+alert(e.message);
+}
+
+}
+
+window.addMedicine = async function(){
+
+try{
+
+await addDoc(
+collection(db,"medicines"),
+{
+name:document.getElementById("name").value,
+price:document.getElementById("price").value,
+image:document.getElementById("image").value
+}
+);
+
+alert("Medicine Added");
+
+}
+catch(e){
+alert(e.message);
+}
+
+}
+
+</script>
+
+</body>
+</html>
+```
