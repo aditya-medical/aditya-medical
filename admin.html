@@ -1,173 +1,321 @@
+v<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya Medico Admin</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#f1f5f9;
+padding:20px;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+margin-bottom:20px;
+}
+
+h1{
+text-align:center;
+color:#16a34a;
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:1px solid #ddd;
+border-radius:8px;
+}
+
+button{
+padding:12px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.login-btn,
+.add-btn{
+width:100%;
+background:#16a34a;
+color:white;
+}
+
+.delete-btn{
+background:#dc2626;
+color:white;
+margin-top:10px;
+width:100%;
+}
+
+.medicine-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+.medicine-card{
+background:white;
+padding:15px;
+border-radius:12px;
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.medicine-card img{
+width:100%;
+height:150px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.price{
+text-decoration:line-through;
+color:red;
+}
+
+.discount{
+color:green;
+font-weight:bold;
+font-size:18px;
+}
+
+#adminPanel{
+display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🏥 Aditya Medico Admin Panel</h1>
+
+<div class="card" id="loginBox">
+
+<h2>Admin Login</h2>
+
+<input id="email" placeholder="Email">
+
+<input id="password" type="password" placeholder="Password">
+
+<button class="login-btn" onclick="login()">
+🔐 Login
+</button>
+
+</div>
+
+<div id="adminPanel">
+
+<div class="card">
+
+<h2>➕ Add Medicine</h2>
+
+<input id="name" placeholder="Medicine Name">
+
+<input id="price" placeholder="Original Price">
+
+<input id="discount" placeholder="Discount Price">
+
+<input id="category" placeholder="Category">
+
+<input id="image" placeholder="Image URL">
+
+<button class="add-btn" onclick="addMedicine()">
+➕ Add Medicine
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📦 All Medicines</h2>
+
+<input
+id="search"
+placeholder="Search Medicine"
+onkeyup="loadMedicines()">
+
+<div id="medicineList" class="medicine-grid"></div>
+
+</div>
+
+</div>
+
+</div>
+
 <script type="module">
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-  getAuth,
-  signInWithEmailAndPassword
+getAuth,
+signInWithEmailAndPassword
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-  doc
+getFirestore,
+collection,
+addDoc,
+getDocs,
+deleteDoc,
+doc
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "aditya-medico.firebaseapp.com",
-  projectId: "aditya-medico",
-  storageBucket: "aditya-medico.firebasestorage.app",
-  messagingSenderId: "733161976762",
-  appId: "1:733161976762:web:df982e69a1015cc52c6383"
+apiKey: "AIzaSyAb7OAM7sTbPyXK90YPVcGKaSwrEVMNkaw",
+authDomain: "aditya-medico.firebaseapp.com",
+projectId: "aditya-medico",
+storageBucket: "aditya-medico.firebasestorage.app",
+messagingSenderId: "733161976762",
+appId: "1:733161976762:web:df982e69a1015cc52c6383"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-/* LOGIN */
+window.login = async function(){
 
-window.login = async function () {
+try{
 
-  try {
+await signInWithEmailAndPassword(
+auth,
+email.value,
+password.value
+);
 
-    await signInWithEmailAndPassword(
-      auth,
-      document.getElementById("email").value,
-      document.getElementById("password").value
-    );
+document.getElementById("loginBox").style.display="none";
+document.getElementById("adminPanel").style.display="block";
 
-    document.getElementById("loginBox").style.display = "none";
-    document.getElementById("adminPanel").style.display = "block";
+loadMedicines();
 
-    loadMedicines();
+alert("Login Success");
 
-    alert("Login Success");
+}
+catch(e){
+alert(e.message);
+}
 
-  } catch (e) {
+}
 
-    alert(e.message);
+window.addMedicine = async function(){
 
-  }
+try{
+await addDoc(
+collection(db,"medicines"),
+{
+name:document.getElementById("name").value,
+price:Number(document.getElementById("price").value),
+discount:Number(document.getElementById("discount").value),
+category:document.getElementById("category").value,
+image:document.getElementById("image").value
+}
+);
 
-};
 
-document.getElementById("loginBtn")
-.addEventListener("click", window.login);
+alert("Medicine Added");
 
-/* ADD MEDICINE */
+document.getElementById("name").value="";
+document.getElementById("price").value="";
+document.getElementById("discount").value="";
+document.getElementById("category").value="";
+document.getElementById("image").value="";
+loadMedicines();
 
-window.addMedicine = async function () {
+}
+catch(e){
+alert(e.message);
+}
 
-  try {
+}
 
-    const medicineData = {
-      name: document.getElementById("name").value,
-      price: document.getElementById("price").value,
-      discount: document.getElementById("discount").value,
-      category: document.getElementById("category").value,
-      image: document.getElementById("image").value
-    };
+async function loadMedicines(){
 
-    await addDoc(
-      collection(db, "medicines"),
-      medicineData
-    );
+const search =
+document.getElementById("search").value.toLowerCase();
 
-    alert("Medicine Added Successfully");
+const snap =
+await getDocs(collection(db,"medicines"));
 
-    loadMedicines();
+let html="";
 
-    document.getElementById("name").value = "";
-    document.getElementById("price").value = "";
-    document.getElementById("discount").value = "";
-    document.getElementById("category").value = "";
-    document.getElementById("image").value = "";
+snap.forEach((d)=>{
 
-  } catch (e) {
+const m=d.data();
 
-    console.error(e);
-    alert(e.message);
+if(
+!m.name.toLowerCase().includes(search)
+) return;
 
-  }
+html+=`
+<div class="medicine-card">
 
-};
+<img src="${m.image}">
 
-/* LOAD MEDICINES */
+<h3>${m.name}</h3>
 
-window.loadMedicines = async function () {
+<p>${m.category}</p>
 
-  const search =
-    document.getElementById("search").value.toLowerCase();
+<p>
+<span class="price">
+₹${m.price}
+</span>
+</p>
 
-  const snap =
-    await getDocs(collection(db, "medicines"));
+<p class="discount">
+₹${m.discount}
+</p>
 
-  let html = "";
+<button
+class="delete-btn"
+onclick="deleteMedicine('${d.id}')">
+🗑 Delete
+</button>
 
-  snap.forEach((d) => {
+</div>
+`;
 
-    const m = d.data();
+});
 
-    if (
-      !(m.name || "")
-      .toLowerCase()
-      .includes(search)
-    ) return;
+document.getElementById("medicineList").innerHTML=html;
 
-    html += `
-      <div class="medicine-card">
+}
 
-        <img src="${m.image}" alt="${m.name}">
+window.deleteMedicine = async function(id){
 
-        <h3>${m.name}</h3>
+if(!confirm("Delete Medicine?")) return;
 
-        <p>${m.category}</p>
+await deleteDoc(doc(db,"medicines",id));
 
-        <p>
-          <span class="price">
-            ₹${m.price}
-          </span>
-        </p>
+loadMedicines();
 
-        <p class="discount">
-          ₹${m.discount}
-        </p>
-
-        <button
-          class="delete-btn"
-          onclick="deleteMedicine('${d.id}')">
-          🗑 Delete
-        </button>
-
-      </div>
-    `;
-
-  });
-
-  document.getElementById("medicineList").innerHTML = html;
-
-};
-
-/* DELETE MEDICINE */
-
-window.deleteMedicine = async function (id) {
-
-  if (!confirm("Delete Medicine?")) return;
-
-  await deleteDoc(
-    doc(db, "medicines", id)
-  );
-
-  loadMedicines();
-
-};
+}
 
 </script>
+
+</body>
+</html>
