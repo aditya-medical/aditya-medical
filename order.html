@@ -64,23 +64,19 @@ let cart=JSON.parse(localStorage.getItem('cart')||'[]');
 function filterCat(c){current=c;render();}
 
 function render(){
-let s=document.getElementById('search').value.toLowerCase();
-let out='';
-function render(){
 
 let s=document.getElementById('search').value.toLowerCase();
 
 let out='';
 
 products
-.filter(p=>
-(current==='All'||p.cat===current)
-&&
+.filter(p =>
+(current==='All' || p.cat===current) &&
 p.name.toLowerCase().includes(s)
 )
 .forEach((p)=>{
 
-out+=`
+out += `
 <div class="card">
 
 <img
@@ -114,42 +110,14 @@ onclick="add('${p.name}')">
 
 });
 
-document.getElementById('products').innerHTML=out;
+document.getElementById('products').innerHTML = out;
 
 updateCart();
 
 }
-<img
-src="${p.image}"
-style="
-width:100%;
-height:150px;
-object-fit:cover;
-border-radius:10px;
-">
 
-<h4>${p.name}</h4>
-
-<p>${p.cat}</p>
-
-<p>
-<del>₹${p.price}</del>
-<b style="color:green">
-₹${p.discount}
-</b>
-</p>
-
-<button
-class="btn"
-onclick="add('${p.name}')">
-🛒 Add To Cart
-</button>
-
-</div>
-`;
-document.getElementById('products').innerHTML=out;
-updateCart();
 }
+
 
 function add(name){
 let item=cart.find(x=>x.name===name);
