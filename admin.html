@@ -226,25 +226,15 @@ window.addMedicine = async function(){
 
 try{
 
-await addDoc(
-collection(db,"medicines"),
-{
-name:name.value,
-price:price.value,
-discount:discount.value,
-category:category.value,
-image:image.value
-}
-);
+
 
 alert("Medicine Added");
 
-name.value="";
-price.value="";
-discount.value="";
-category.value="";
-image.value="";
-
+document.getElementById("name").value="";
+document.getElementById("price").value="";
+document.getElementById("discount").value="";
+document.getElementById("category").value="";
+document.getElementById("image").value="";
 loadMedicines();
 
 }
