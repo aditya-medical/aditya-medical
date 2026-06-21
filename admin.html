@@ -134,6 +134,10 @@ display:none;
 <input id="name" placeholder="Medicine Name">
 
 <input id="price" placeholder="Original Price">
+  
+<input id="discount" placeholder="Discount Price">
+  
+<input id="category" placeholder="Category">
 
 <input id="discount" placeholder="Discount Price">
 
@@ -184,7 +188,6 @@ deleteDoc,
 doc
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
 const firebaseConfig = {
 apiKey: "AIzaSyAb7OAM7sTbPyXK90YPVcGKaSwrEVMNkaw",
 authDomain: "aditya-medico.firebaseapp.com",
@@ -225,25 +228,23 @@ alert(e.message);
 window.addMedicine = async function(){
 
 try{
-await addDoc(
-collection(db,"medicines"),
-{
-name:document.getElementById("name").value,
-price:Number(document.getElementById("price").value),
-discount:Number(document.getElementById("discount").value),
-category:document.getElementById("category").value,
-image:document.getElementById("image").value
-}
-);
 
+await addDoc(collection(db,"medicines"),{
+name:name.value,
+price:price.value,
+discount:discount.value,
+category:category.value,
+image:image.value
+});
 
 alert("Medicine Added");
 
-document.getElementById("name").value="";
-document.getElementById("price").value="";
-document.getElementById("discount").value="";
-document.getElementById("category").value="";
-document.getElementById("image").value="";
+name.value="";
+price.value="";
+discount.value="";
+category.value="";
+image.value="";
+
 loadMedicines();
 
 }
@@ -252,7 +253,6 @@ alert(e.message);
 }
 
 }
-
 async function loadMedicines(){
 
 const search =
@@ -314,7 +314,66 @@ await deleteDoc(doc(db,"medicines",id));
 loadMedicines();
 
 }
+async function loadMedicines(){
 
+const snap =
+await getDocs(collection(db,"medicines"));
+
+let html="";
+
+snap.forEach((m)=>{
+
+const data=m.data();
+
+html+=`
+
+<div style="
+background:#fff;
+padding:10px;
+margin:10px 0;
+border-radius:10px;
+border:1px solid #ddd;
+">
+
+<img
+src="${data.image}"
+width="80">
+
+<h4>${data.name}</h4>
+
+<p>
+₹${data.price}
+</p>
+
+<button
+onclick="deleteMedicine('${m.id}')">
+Delete
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("medicineList").innerHTML=html;
+
+}
+
+window.deleteMedicine =
+async function(id){
+
+if(!confirm("Delete?")) return;
+
+await deleteDoc(
+doc(db,"medicines",id)
+);
+
+loadMedicines();
+
+}
+
+loadMedicines();
 </script>
 
 </body>
