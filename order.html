@@ -56,22 +56,7 @@ header{background:#0f5132;color:#fff;padding:18px;text-align:center;position:sti
 </div>
 
 <script>
-const products=[
-{name:'Dolo 650',price:30,cat:'Fever'},
-{name:'Crocin',price:25,cat:'Fever'},
-{name:'Azithral 500',price:120,cat:'Antibiotics'},
-{name:'Cefixime',price:140,cat:'Antibiotics'},
-{name:'Telmisartan',price:90,cat:'BP'},
-{name:'Amlodipine',price:75,cat:'BP'},
-{name:'Metformin',price:80,cat:'Diabetes'},
-{name:'Glycomet',price:85,cat:'Diabetes'},
-{name:'Supradyn',price:110,cat:'Vitamins'},
-{name:'Zincovit',price:95,cat:'Vitamins'},
-{name:'Pampers',price:250,cat:'Baby Care'},
-{name:'Dexolac',price:350,cat:'Baby Care'},
-{name:'Dettol',price:60,cat:'First Aid'},
-{name:'Bandage',price:20,cat:'First Aid'}
-];
+const products=[];
 
 let current='All';
 let cart=JSON.parse(localStorage.getItem('cart')||'[]');
@@ -83,9 +68,37 @@ let s=document.getElementById('search').value.toLowerCase();
 let out='';
 products.filter(p=>(current==='All'||p.cat===current)&&p.name.toLowerCase().includes(s))
 .forEach((p,i)=>{
-out+=`<div class="card"><h4>${p.name}</h4><p>${p.cat}</p><p>₹${p.price}</p>
-<button class="btn" onclick="add('${p.name}')">Add</button></div>`;
-});
+out+=`
+<div class="card">
+
+<img
+src="${p.image}"
+style="
+width:100%;
+height:150px;
+object-fit:cover;
+border-radius:10px;
+">
+
+<h4>${p.name}</h4>
+
+<p>${p.cat}</p>
+
+<p>
+<del>₹${p.price}</del>
+<b style="color:green">
+₹${p.discount}
+</b>
+</p>
+
+<button
+class="btn"
+onclick="add('${p.name}')">
+🛒 Add To Cart
+</button>
+
+</div>
+`;
 document.getElementById('products').innerHTML=out;
 updateCart();
 }
@@ -134,6 +147,57 @@ msg+=`\nAddress: ${address.value}`;
 window.open('https://wa.me/918825253574?text='+encodeURIComponent(msg));
 }
 render();
+</script>
+  <script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyAb7OAM7sTbPyXK90YPVcGKaSwrEVMNkaw",
+authDomain: "aditya-medico.firebaseapp.com",
+projectId: "aditya-medico",
+storageBucket: "aditya-medico.firebasestorage.app",
+messagingSenderId: "733161976762",
+appId: "1:733161976762:web:df982e69a1015cc52c6383"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function loadMedicines(){
+
+const snap =
+await getDocs(collection(db,"medicines"));
+
+products.length = 0;
+
+snap.forEach(doc=>{
+
+let d = doc.data();
+
+products.push({
+name:d.name,
+price:Number(d.price),
+discount:Number(d.discount || d.price),
+cat:d.category || "Medicine",
+image:d.image || ""
+});
+
+});
+
+render();
+
+}
+
+loadMedicines();
+
 </script>
 </body>
 </html>
