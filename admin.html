@@ -225,7 +225,16 @@ alert(e.message);
 window.addMedicine = async function(){
 
 try{
-
+await addDoc(
+collection(db,"medicines"),
+{
+name:document.getElementById("name").value,
+price:Number(document.getElementById("price").value),
+discount:Number(document.getElementById("discount").value),
+category:document.getElementById("category").value,
+image:document.getElementById("image").value
+}
+);
 
 
 alert("Medicine Added");
