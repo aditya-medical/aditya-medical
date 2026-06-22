@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aditya Medico Admin</title>
-<title>Aditya Medico Admin</title>
 
 <link rel="icon" href="images/logo.png">
 <style>
@@ -112,13 +111,6 @@ display:none;
 
 <div class="container">
 
-<div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px;">
-
-<img src="images/logo.png"
-     alt="Logo"
-     style="width:60px;height:60px;border-radius:50%;object-fit:cover;">
-
-<div class="container">
 
 <div style="display:flex;align-items:center;justify-content:center;gap:15px;margin-bottom:20px;">
 
@@ -132,8 +124,6 @@ Aditya Medico Admin Panel
 
 </div>
 
-<div class="card" id="loginBox">
-</div>
 <div class="card" id="loginBox">
 
 <h2>Admin Login</h2>
@@ -325,8 +315,9 @@ onclick="deleteMedicine('${d.id}')">
 </button>
 
 </div>
-;
-})
+`;
+
+});
 
 document.getElementById("medicineList").innerHTML=html;
 
