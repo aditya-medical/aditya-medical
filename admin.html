@@ -279,36 +279,22 @@ if(
 ) return;
 
 html+=`
+
 <div class="medicine-card">
 
-<img src="${p.image}"
-style="width:100%;height:auto;max-height:220px;object-fit:contain;border-radius:10px;display:block;margin:auto;">
+<img src="${p.image}" alt="${p.name}">
 
-<h3>${m.name}</h3>
+<h3>${p.name}</h3>
 
-<p>${m.category}</p>
+<p>${p.category}</p>
 
 <p>
-<span class="price">
-₹${m.price}
-</span>
+<span class="price">₹${p.price}</span>
 </p>
-
-<p class="discount">
-₹${m.discount}
-</p>
-
-<button
-class="delete-btn"
-onclick="deleteMedicine('${d.id}')">
-🗑 Delete
-</button>
 
 </div>
+
 `;
-
-});
-
 document.getElementById("medicineList").innerHTML=html;
 
 }
