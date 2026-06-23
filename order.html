@@ -6,6 +6,39 @@
 <title>Aditya Medico + OPD - Online Order</title>
 <link rel="icon" href="images/logo.png">
 <style>
+  .add-cart{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+background:#16a34a;
+color:white;
+border-radius:10px;
+padding:8px;
+font-weight:bold;
+}
+
+.add-cart button{
+background:white;
+color:#16a34a;
+border:none;
+width:28px;
+height:28px;
+border-radius:50%;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.add-btn{
+background:#16a34a;
+color:white;
+border:none;
+padding:10px 25px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
   .whatsapp-float{
 position:fixed;
 bottom:20px;
@@ -148,9 +181,17 @@ style="width:100%;height:auto;max-height:220px;object-fit:contain;border-radius:
 <b style="color:green"> ₹${p.discount}</b>
 </p>
 
-<button class="btn" onclick="add('${p.name}')">
-🛒 Add To Cart
+${cart.find(x=>x.name===p.name) ? `
+<div class="add-cart">
+<button onclick="change('${p.name}',-1)">-</button>
+<span>${cart.find(x=>x.name===p.name).qty}</span>
+<button onclick="change('${p.name}',1)">+</button>
+</div>
+` : `
+<button class="add-btn" onclick="add('${p.name}')">
+ADD
 </button>
+`}
 
 </div>
 `;
@@ -202,6 +243,7 @@ JSON.stringify(cart)
 );
 
 updateCart();
+render();
 
 }
 
