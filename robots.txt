@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aditya-medical.github.io/aditya-medical/sitemap.xml
